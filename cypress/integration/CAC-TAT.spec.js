@@ -4,6 +4,8 @@
 describe('Teste form Fale Conosco', function() {
   
   it.only('visita pagina e testa title', function() {  
+    
+    
     cy.visit('../src/index.html')
     // cy.visit('http://localhost:3000/dev/hellmannsCelebrar2024/duvidas')
 
@@ -54,36 +56,41 @@ describe('Teste form Fale Conosco', function() {
     cy.get('.error').should('be.visible')
   })
 
-  it.only('preenche e limpa os campos nome, sobrenome, email e telefone', function() {
-      cy.get('#firstName')
-        .type('Eduardo')
-        .should('have.value', 'Eduardo')
-        .clear()
-        .should('have.value', '')
+  it('preenche e limpa os campos nome, sobrenome, email e telefone', function() {
+    cy.get('#firstName')
+      .type('Eduardo')
+      .should('have.value', 'Eduardo')
+      .clear()
+      .should('have.value', '')
 
-      cy.get('#lastName')
-        .type('Martelo')
-        .should('have.value', 'Martelo')
-        .clear()
-        .should('have.value', '')
+    cy.get('#lastName')
+      .type('Martelo')
+      .should('have.value', 'Martelo')
+      .clear()
+      .should('have.value', '')
 
-      cy.get('#email')
-        .type('smarteloedu@gmail.com')
-        .should('have.value', 'smarteloedu@gmail.com')
-        .clear()
-        .should('have.value', '')
+    cy.get('#email')
+      .type('smarteloedu@gmail.com')
+      .should('have.value', 'smarteloedu@gmail.com')
+      .clear()
+      .should('have.value', '')
 
-      cy.get('#phone')
-        .type('11910702169')
-        .should('have.value', '11910702169')
-        .clear()
-        .should('have.value', '')
+    cy.get('#phone')
+      .type('11910702169')
+      .should('have.value', '11910702169')
+      .clear()
+      .should('have.value', '')
 
-      cy.get('#open-text-area')
-        .type('teste')
-        .should('have.value', 'teste')
-        .clear()
-        .should('have.value', '')
+    cy.get('#open-text-area')
+      .type('teste')
+      .should('have.value', 'teste')
+      .clear()
+      .should('have.value', '')
+  })
 
+  it.only('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function() {
+    cy.get('.button[type="submit').click()
+
+    cy.get('.error').should('be.visible')
   })
 })
