@@ -2,7 +2,8 @@
 
 
 describe('Teste form Fale Conosco', function() {
-  it('visita pagina e testa title', function() {  
+  
+  it.only('visita pagina e testa title', function() {  
     cy.visit('../src/index.html')
     // cy.visit('http://localhost:3000/dev/hellmannsCelebrar2024/duvidas')
 
@@ -36,9 +37,53 @@ describe('Teste form Fale Conosco', function() {
     cy.get('#lastName').type('Martelo')
     cy.get('#email').type('smarteloedu@g')
     cy.get('#phone').type('11910702169')
-    cy.get('#open-text-area').type('teste') // diminui o tempo do texto
+    cy.get('#open-text-area').type('teste')
     cy.get('button[type="submit"]').click()
 
     cy.get('.error').should('be.visible')
+  })
+
+  it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', function() {
+    cy.get('#firstName').type('Eduardo')
+    cy.get('#lastName').type('Martelo')
+    cy.get('#email').type('smarteloedu@gmail.com')
+    cy.get('#phone-checkbox').click()
+    cy.get('#open-text-area').type('teste')
+    cy.get('button[type="submit"]').click()
+
+    cy.get('.error').should('be.visible')
+  })
+
+  it.only('preenche e limpa os campos nome, sobrenome, email e telefone', function() {
+      cy.get('#firstName')
+        .type('Eduardo')
+        .should('have.value', 'Eduardo')
+        .clear()
+        .should('have.value', '')
+
+      cy.get('#lastName')
+        .type('Martelo')
+        .should('have.value', 'Martelo')
+        .clear()
+        .should('have.value', '')
+
+      cy.get('#email')
+        .type('smarteloedu@gmail.com')
+        .should('have.value', 'smarteloedu@gmail.com')
+        .clear()
+        .should('have.value', '')
+
+      cy.get('#phone')
+        .type('11910702169')
+        .should('have.value', '11910702169')
+        .clear()
+        .should('have.value', '')
+
+      cy.get('#open-text-area')
+        .type('teste')
+        .should('have.value', 'teste')
+        .clear()
+        .should('have.value', '')
+
   })
 })
